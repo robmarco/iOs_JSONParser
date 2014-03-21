@@ -19,6 +19,12 @@
 		4119BE3318DBC04F006DAB65 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4119BE1B18DBC04E006DAB65 /* UIKit.framework */; };
 		4119BE3B18DBC04F006DAB65 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4119BE3918DBC04F006DAB65 /* InfoPlist.strings */; };
 		4119BE3D18DBC04F006DAB65 /* JSONParserRMTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4119BE3C18DBC04F006DAB65 /* JSONParserRMTests.m */; };
+		4119BE4918DBCA00006DAB65 /* NSURLConnectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4119BE4718DBCA00006DAB65 /* NSURLConnectionViewController.m */; };
+		4119BE4A18DBCA00006DAB65 /* NSURLConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4119BE4818DBCA00006DAB65 /* NSURLConnectionViewController.xib */; };
+		4119BE5318DC54FD006DAB65 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4119BE5218DC54FD006DAB65 /* JSONKit.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4119BE5518DC557C006DAB65 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4119BE5418DC557C006DAB65 /* libz.dylib */; };
+		4119BE5718DC55A4006DAB65 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4119BE5618DC55A4006DAB65 /* SystemConfiguration.framework */; };
+		4119BE5A18DC5B69006DAB65 /* Loan.m in Sources */ = {isa = PBXBuildFile; fileRef = 4119BE5918DC5B69006DAB65 /* Loan.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,15 @@
 		4119BE3818DBC04F006DAB65 /* JSONParserRMTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JSONParserRMTests-Info.plist"; sourceTree = "<group>"; };
 		4119BE3A18DBC04F006DAB65 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4119BE3C18DBC04F006DAB65 /* JSONParserRMTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONParserRMTests.m; sourceTree = "<group>"; };
+		4119BE4618DBCA00006DAB65 /* NSURLConnectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NSURLConnectionViewController.h; path = Classes/ViewControllers/NSURLConnectionViewController.h; sourceTree = "<group>"; };
+		4119BE4718DBCA00006DAB65 /* NSURLConnectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NSURLConnectionViewController.m; path = Classes/ViewControllers/NSURLConnectionViewController.m; sourceTree = "<group>"; };
+		4119BE4818DBCA00006DAB65 /* NSURLConnectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NSURLConnectionViewController.xib; path = Classes/ViewControllers/NSURLConnectionViewController.xib; sourceTree = "<group>"; };
+		4119BE5118DC54FD006DAB65 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		4119BE5218DC54FD006DAB65 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		4119BE5418DC557C006DAB65 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		4119BE5618DC55A4006DAB65 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4119BE5818DC5B69006DAB65 /* Loan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Loan.h; path = Classes/Objects/Loan.h; sourceTree = "<group>"; };
+		4119BE5918DC5B69006DAB65 /* Loan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Loan.m; path = Classes/Objects/Loan.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4119BE5718DC55A4006DAB65 /* SystemConfiguration.framework in Frameworks */,
+				4119BE5518DC557C006DAB65 /* libz.dylib in Frameworks */,
 				4119BE1A18DBC04E006DAB65 /* CoreGraphics.framework in Frameworks */,
 				4119BE1C18DBC04E006DAB65 /* UIKit.framework in Frameworks */,
 				4119BE1818DBC04E006DAB65 /* Foundation.framework in Frameworks */,
@@ -96,6 +113,8 @@
 		4119BE1618DBC04E006DAB65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4119BE5618DC55A4006DAB65 /* SystemConfiguration.framework */,
+				4119BE5418DC557C006DAB65 /* libz.dylib */,
 				4119BE1718DBC04E006DAB65 /* Foundation.framework */,
 				4119BE1918DBC04E006DAB65 /* CoreGraphics.framework */,
 				4119BE1B18DBC04E006DAB65 /* UIKit.framework */,
@@ -107,10 +126,14 @@
 		4119BE1D18DBC04E006DAB65 /* JSONParserRM */ = {
 			isa = PBXGroup;
 			children = (
+				4119BE5018DC54FD006DAB65 /* JSONKit */,
+				4119BE4B18DBCA08006DAB65 /* NSURLConnectionViewController */,
 				4119BE2618DBC04E006DAB65 /* AppDelegate.h */,
 				4119BE2718DBC04E006DAB65 /* AppDelegate.m */,
 				4119BE2918DBC04E006DAB65 /* Images.xcassets */,
 				4119BE1E18DBC04E006DAB65 /* Supporting Files */,
+				4119BE5818DC5B69006DAB65 /* Loan.h */,
+				4119BE5918DC5B69006DAB65 /* Loan.m */,
 			);
 			path = JSONParserRM;
 			sourceTree = "<group>";
@@ -142,6 +165,26 @@
 				4119BE3918DBC04F006DAB65 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4119BE4B18DBCA08006DAB65 /* NSURLConnectionViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4119BE4618DBCA00006DAB65 /* NSURLConnectionViewController.h */,
+				4119BE4718DBCA00006DAB65 /* NSURLConnectionViewController.m */,
+				4119BE4818DBCA00006DAB65 /* NSURLConnectionViewController.xib */,
+			);
+			name = NSURLConnectionViewController;
+			sourceTree = "<group>";
+		};
+		4119BE5018DC54FD006DAB65 /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				4119BE5118DC54FD006DAB65 /* JSONKit.h */,
+				4119BE5218DC54FD006DAB65 /* JSONKit.m */,
+			);
+			name = JSONKit;
+			path = Classes/JSONKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4119BE2218DBC04E006DAB65 /* InfoPlist.strings in Resources */,
+				4119BE4A18DBCA00006DAB65 /* NSURLConnectionViewController.xib in Resources */,
 				4119BE2A18DBC04E006DAB65 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,8 +283,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4119BE5A18DC5B69006DAB65 /* Loan.m in Sources */,
 				4119BE2818DBC04E006DAB65 /* AppDelegate.m in Sources */,
 				4119BE2418DBC04E006DAB65 /* main.m in Sources */,
+				4119BE5318DC54FD006DAB65 /* JSONKit.m in Sources */,
+				4119BE4918DBCA00006DAB65 /* NSURLConnectionViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +484,7 @@
 				4119BE4218DBC04F006DAB65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4119BE4318DBC04F006DAB65 /* Build configuration list for PBXNativeTarget "JSONParserRMTests" */ = {
 			isa = XCConfigurationList;
@@ -445,6 +493,7 @@
 				4119BE4518DBC04F006DAB65 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

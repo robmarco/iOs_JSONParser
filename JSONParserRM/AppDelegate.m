@@ -13,8 +13,15 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+ 
+    self.nsurlconViewController = [[NSURLConnectionViewController alloc] initWithNibName:@"NSURLConnectionViewController" bundle:nil];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.nsurlconViewController];
+    
+    
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    [self.window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
     return YES;
 }

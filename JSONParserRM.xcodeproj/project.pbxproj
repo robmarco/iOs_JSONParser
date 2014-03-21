@@ -126,14 +126,13 @@
 		4119BE1D18DBC04E006DAB65 /* JSONParserRM */ = {
 			isa = PBXGroup;
 			children = (
+				4119BE5B18DC6117006DAB65 /* Objects */,
 				4119BE5018DC54FD006DAB65 /* JSONKit */,
 				4119BE4B18DBCA08006DAB65 /* NSURLConnectionViewController */,
 				4119BE2618DBC04E006DAB65 /* AppDelegate.h */,
 				4119BE2718DBC04E006DAB65 /* AppDelegate.m */,
 				4119BE2918DBC04E006DAB65 /* Images.xcassets */,
 				4119BE1E18DBC04E006DAB65 /* Supporting Files */,
-				4119BE5818DC5B69006DAB65 /* Loan.h */,
-				4119BE5918DC5B69006DAB65 /* Loan.m */,
 			);
 			path = JSONParserRM;
 			sourceTree = "<group>";
@@ -185,6 +184,15 @@
 			);
 			name = JSONKit;
 			path = Classes/JSONKit;
+			sourceTree = "<group>";
+		};
+		4119BE5B18DC6117006DAB65 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				4119BE5818DC5B69006DAB65 /* Loan.h */,
+				4119BE5918DC5B69006DAB65 /* Loan.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

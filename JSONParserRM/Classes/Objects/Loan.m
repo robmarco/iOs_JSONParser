@@ -10,4 +10,20 @@
 
 @implementation Loan
 
+@synthesize id;
+@synthesize name;
+@synthesize status;
+@synthesize funded_amount;
+@synthesize basket_amount;
+@synthesize activity;
+@synthesize sector;
+@synthesize use;
+@synthesize partner_id;
+@synthesize posted_date;
+@synthesize planned_expiration_date;
+@synthesize loan_amount;
+@synthesize borrower_count;
+@synthesize lender_count;
+@synthesize bonus_credit_eligibility;
+
 @end

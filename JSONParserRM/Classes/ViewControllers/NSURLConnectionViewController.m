@@ -9,6 +9,7 @@
 //
 
 #import "NSURLConnectionViewController.h"
+#import "Loan.h"
 
 @interface NSURLConnectionViewController ()
 
@@ -18,6 +19,8 @@
 
 @synthesize _responseData;
 @synthesize _connection;
+
+NSMutableArray *arrayLoan;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,9 +37,12 @@
     [self setTitle:@"JSONParser"];
     
     // Create table and set delegates
-    
+    [self.tableData setDelegate:self];
+    [self.tableData setDataSource:self];
+
+
     // Setting up URL
-    NSURL *url = [NSURL URLWithString:@""];
+    NSURL *url = [NSURL URLWithString:@"http://api.kivaws.org/v1/loans/search.json?status=fundraising"];
     
     // Create request for connection
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -62,7 +68,30 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - NSURLConnection Delegate
+#pragma mark - UITableView DataSource Methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier = @"cellIdentifier";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    [cell.textLabel setText:[[arrayLoan objectAtIndex:indexPath.row] name]];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrayLoan count];
+}
+
+#pragma mark - NSURLConnection Delegate Methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -100,32 +129,29 @@
                 // Starting JSON Parser
                 NSLog(@"--> dic: %@", dict);
                 
-                if ([dict objectForKey:@"comunidades"] != [NSNull null])
+                if ([dict objectForKey:@"loans"] != [NSNull null])
                 {
-                    // Initializate Cities Array
-                    // arrayCiudad = [[NSMutableArray] alloc] initWithCapacity:0];
+                    // Initializate Loan Array
+                    arrayLoan = [[NSMutableArray alloc] initWithCapacity:0];
                     
                     // Loop throw every block we find in the JSON
-                    for (NSDictionary *dictCity in [dict objectForKey:@"comunidades"])
+                    for (NSDictionary *dictLoan in [dict objectForKey:@"loans"])
                     {
-                        //Creamos un objeto con la informacion parseada para añadirlo al array
-//                        Comunidad *comunidad=[[Comunidad alloc]initComunidad];
-//                        
-//                        if ([dictCity objectForKey:@"nombre"]!=[NSNull null])
-//                            [comunidad setNombre:[dictCity objectForKey:@"nombre"]];
-//                        
-//                        if ([dictCity objectForKey:@"superficie"]!=[NSNull null])
-//                            [comunidad setSuperficie:[[dictCity objectForKey:@"superficie"] intValue]];
-//                        
-//                        if ([dictCity objectForKey:@"porcentaje"]!=[NSNull null])
-//                            [comunidad setPorcentaje:[[dictCity objectForKey:@"porcentaje"] floatValue]];
-//                        
-//                        [arrayCiudad addObject:comunidad];
+                        Loan *loan = [[Loan alloc] init];
+                        
+                        if ([dictLoan objectForKey:@"id"] != [NSNull null])
+                            [loan setId:[dictLoan objectForKey:@"id"]];
+                        
+                        if ([dictLoan objectForKey:@"name"] != [NSNull null])
+                            [loan setName:[dictLoan objectForKey:@"name"]];
+                        
+                        [arrayLoan addObject:loan];                        
                     }
                 }
                 
                 // Refresh table
-                // [tableExample reloadData];
+                [self.tableData reloadData];
+                
             } else {
                 NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLErrorKey]);
             }

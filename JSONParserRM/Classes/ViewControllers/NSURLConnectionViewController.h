@@ -9,9 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "JSONKit.h"
 
-@interface NSURLConnectionViewController : UIViewController <NSURLConnectionDelegate>
+@interface NSURLConnectionViewController : UIViewController <NSURLConnectionDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSURLConnection *_connection;
 @property (nonatomic, strong) NSMutableData *_responseData;
+@property (weak, nonatomic) IBOutlet UITableView *tableData;
 
 @end

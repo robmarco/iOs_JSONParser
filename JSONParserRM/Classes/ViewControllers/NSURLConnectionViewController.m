@@ -34,7 +34,7 @@ NSMutableArray *arrayLoan;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"JSONParser"];
+    [self setTitle:@"NSURLConnection"];
     
     // Create table and set delegates
     [self.tableData setDelegate:self];

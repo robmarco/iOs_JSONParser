@@ -8,6 +8,7 @@
 
 #import "DetailViewController.h"
 #import "WebDetailViewController.h"
+#import "VideoViewController.h"
 
 @interface DetailViewController ()
 
@@ -57,7 +58,8 @@
 #pragma mark IBAction
 
 - (IBAction)pushVideo:(id)sender {
-
+    VideoViewController *videoVC = [[VideoViewController alloc] initWithNibName:@"VideoViewController" bundle:nil];
+    [self.navigationController pushViewController:videoVC animated:YES];
 }
 
 - (IBAction)pushWebSite:(id)sender {

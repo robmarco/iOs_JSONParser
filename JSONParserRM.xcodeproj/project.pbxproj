@@ -43,6 +43,7 @@
 		41EE594218EA234E001EC666 /* cut_new.png in Resources */ = {isa = PBXBuildFile; fileRef = 41EE594118EA234E001EC666 /* cut_new.png */; };
 		41EE594718EA313A001EC666 /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EE594518EA313A001EC666 /* VideoViewController.m */; };
 		41EE594818EA313A001EC666 /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41EE594618EA313A001EC666 /* VideoViewController.xib */; };
+		41EE594A18EA363B001EC666 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EE594918EA363B001EC666 /* MediaPlayer.framework */; };
 		41F1808718E188E500B0D54E /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F1807018E188E500B0D54E /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41F1808818E188E500B0D54E /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F1807318E188E500B0D54E /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		41F1808918E188E500B0D54E /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 41F1807518E188E500B0D54E /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -118,6 +119,7 @@
 		41EE594418EA313A001EC666 /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VideoViewController.h; path = Classes/ViewControllers/VideoViewController.h; sourceTree = "<group>"; };
 		41EE594518EA313A001EC666 /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VideoViewController.m; path = Classes/ViewControllers/VideoViewController.m; sourceTree = "<group>"; };
 		41EE594618EA313A001EC666 /* VideoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VideoViewController.xib; path = Classes/ViewControllers/VideoViewController.xib; sourceTree = "<group>"; };
+		41EE594918EA363B001EC666 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		41F1806F18E188E500B0D54E /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		41F1807018E188E500B0D54E /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		41F1807118E188E500B0D54E /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41EE594A18EA363B001EC666 /* MediaPlayer.framework in Frameworks */,
 				4119BE5718DC55A4006DAB65 /* SystemConfiguration.framework in Frameworks */,
 				4119BE5518DC557C006DAB65 /* libz.dylib in Frameworks */,
 				4119BE1A18DBC04E006DAB65 /* CoreGraphics.framework in Frameworks */,
@@ -193,6 +196,7 @@
 		4119BE1618DBC04E006DAB65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				41EE594918EA363B001EC666 /* MediaPlayer.framework */,
 				4119BE5618DC55A4006DAB65 /* SystemConfiguration.framework */,
 				4119BE5418DC557C006DAB65 /* libz.dylib */,
 				4119BE1718DBC04E006DAB65 /* Foundation.framework */,

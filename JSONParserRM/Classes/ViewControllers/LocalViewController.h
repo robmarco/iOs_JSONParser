@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JSONKit.h"
 
 @interface LocalViewController : UIViewController
 {
-    NSMutableArray *arrayData;
+    NSMutableArray *arrayWithSportNews;
 }
 @end

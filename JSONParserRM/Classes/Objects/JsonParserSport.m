@@ -10,20 +10,35 @@
 
 @implementation JsonParserSport
 
-- (NSMutableArray *)parseJson:(ASIHTTPRequest *)requestCon {
+#pragma mark - Public Methods
+
+- (NSMutableArray *)parseRemoteJSON:(ASIHTTPRequest *)requestCon {
     
     NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     
     // Init JSON parser
     JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionValidFlags];
-    
+
     // Parsing the data obtaining the data in a dictionary
     NSDictionary *dic = [jsonDecoder objectWithData:[requestCon responseData]];
+    [self parseDataToArray:array responseDictionary:dic];
+    
+    return array;
+}
+
+- (NSMutableArray *)parseLocalJSON:(NSDictionary*)dict {
+
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
+    [self parseDataToArray:array responseDictionary:dict];
+    return array;
+}
+
+#pragma mark - Private Methods
+
+- (void) parseDataToArray:(NSMutableArray *)array responseDictionary:(NSDictionary*)dic {
     
     if ([dic objectForKey:@"headlines"] != [NSNull null])
     {
-        //arrayData = [[NSMutableArray alloc] initWithCapacity:0];
-        
         for (NSDictionary *dicHeadLines in [dic objectForKey:@"headlines"])
         {
             SportNew *sportNew = [[SportNew alloc] init];
@@ -77,8 +92,7 @@
             [array addObject:sportNew];
         }
     }
-    
-    return array;
 }
+
 
 @end

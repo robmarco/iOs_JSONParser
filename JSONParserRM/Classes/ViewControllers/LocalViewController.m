@@ -7,7 +7,7 @@
 //
 
 #import "LocalViewController.h"
-#import "Loan.h"
+#import "JsonParserSport.h"
 
 @interface LocalViewController ()
 
@@ -29,20 +29,12 @@
     [super viewDidLoad];
     [self setTitle:@"Local JSON"];
     
-    [self parseLocalJSONAsync];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark Private Methods
-
-- (void) parseLocalJSONAsync {
+    arrayWithSportNews = [[NSMutableArray alloc] initWithCapacity:0];
+    
+    JsonParserSport *jsonParser = [[JsonParserSport alloc] init];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
         // Initializate JSON parser
         JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionValidFlags];
         
@@ -54,35 +46,20 @@
         NSDictionary *dict = [jsonDecoder objectWithData:jsonData];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            // Starting JSON Parser
-            NSLog(@"--> dic: %@", dict);
-            
-            if ([dict objectForKey:@"loans"] != [NSNull null])
-            {
-                // Initializate Loan Array
-                arrayData = [[NSMutableArray alloc] initWithCapacity:0];
-                
-                // Loop throw every block we find in the JSON
-                for (NSDictionary *dictLoan in [dict objectForKey:@"loans"])
-                {
-                    Loan *loan = [[Loan alloc] init];
-                    
-                    if ([dictLoan objectForKey:@"id"] != [NSNull null])
-                        [loan setId:[dictLoan objectForKey:@"id"]];
-                    
-                    if ([dictLoan objectForKey:@"name"] != [NSNull null])
-                        [loan setName:[dictLoan objectForKey:@"name"]];
-                    
-                    [arrayData addObject:loan];
-                }
-            }
-            
-            // Refresh table
-            //[self.tableData reloadData];
-        
+            arrayWithSportNews = [jsonParser parseLocalJSON:dict];
+             NSLog(@"%@", arrayWithSportNews);
         });
     });
+    
+   
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
 
 @end

@@ -13,6 +13,7 @@
 
 @interface JsonParserSport : NSObject
 
-- (NSMutableArray *)parseJson:(ASIHTTPRequest*)requestCon;
+- (NSMutableArray *)parseRemoteJSON:(ASIHTTPRequest*)requestCon;
+- (NSMutableArray *)parseLocalJSON:(NSDictionary*)dict;
 
 @end

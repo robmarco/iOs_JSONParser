@@ -117,7 +117,7 @@
         case 200:
         {
             JsonParserSport *jsonParser = [[JsonParserSport alloc] init];
-            arrayWithSportNews = [jsonParser parseJson:request];
+            arrayWithSportNews = [jsonParser parseRemoteJSON:request];
             [self.tableNews reloadData];
             break;
         }

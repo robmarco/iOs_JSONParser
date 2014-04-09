@@ -55,14 +55,13 @@
 @property (nonatomic, strong) NSNumber *id;
 @property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSString *status;
-// @property descriptions
 @property (nonatomic, strong) NSNumber *funded_amount;
 @property (nonatomic, strong) NSNumber *basket_amount;
-//@property image
+@property (nonatomic, strong) NSNumber *imageId;
 @property (nonatomic, strong) NSString *activity;
 @property (nonatomic, strong) NSString *sector;
 @property (nonatomic, strong) NSString *use;
-// @property location
+@property (nonatomic, strong) NSString *country;
 @property (nonatomic, strong) NSNumber *partner_id;
 @property (nonatomic, strong) NSDate *posted_date;
 @property (nonatomic, strong) NSDate *planned_expiration_date;

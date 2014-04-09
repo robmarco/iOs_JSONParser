@@ -117,8 +117,12 @@
         case 200:
         {
             JsonParserSport *jsonParser = [[JsonParserSport alloc] init];
-            arrayWithSportNews = [jsonParser parseRemoteJSON:request];
-            [self.tableNews reloadData];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                arrayWithSportNews = [jsonParser parseRemoteJSON:request];
+                [self.tableNews performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
+            });
+            
             break;
         }
             
@@ -141,8 +145,7 @@
     view.layer.cornerRadius = 10;
     view.clipsToBounds = YES;
     view.layer.borderColor = color.CGColor;
-    view.layer.borderWidth = 0.5;
-    
+    view.layer.borderWidth = 0.5;    
 }
 
 @end

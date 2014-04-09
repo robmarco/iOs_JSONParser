@@ -8,6 +8,8 @@
 
 #import "LocalViewController.h"
 #import "JsonParserSport.h"
+#import "CustomCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface LocalViewController ()
 
@@ -19,7 +21,7 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        
     }
     return self;
 }
@@ -27,31 +29,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"Local JSON"];
+    // Navigation Bar Configuration
+    [self.navigationController.navigationBar setTranslucent:NO];
+    [self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"navigationbar_bg.png"]]];
     
     arrayWithSportNews = [[NSMutableArray alloc] initWithCapacity:0];
-    
     JsonParserSport *jsonParser = [[JsonParserSport alloc] init];
+    arrayWithSportNews = [jsonParser parseLocalJSON];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Initializate JSON parser
-        JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionValidFlags];
-        
-        // Set the local JSON URL Path
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"jsonExample" ofType:@"json"];
-        NSData* jsonData = [NSData dataWithContentsOfFile:path];
-        
-        // Parsing Data and move data result into a dictionary
-        NSDictionary *dict = [jsonDecoder objectWithData:jsonData];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            arrayWithSportNews = [jsonParser parseLocalJSON:dict];
-             NSLog(@"%@", arrayWithSportNews);
-        });
-    });
+    [self.tableLocal setBackgroundColor:[UIColor blackColor]];
+    [self.tableLocal setDelegate:self];
+    [self.tableLocal setDataSource:self];
     
-   
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -60,6 +50,53 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark UITableView DataSource Methods
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *cellIdentifier = @"CellIdentifier";
+    
+    CustomCell *cell = (CustomCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"CustomCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
+    }
+    
+    [cell.labelTitle setText:[[arrayWithSportNews objectAtIndex:indexPath.row] title]];
+    [cell.labelDescription setText:[NSString stringWithFormat:@"Hace %d días", [[arrayWithSportNews objectAtIndex:indexPath.row] getDaysFromToday]]];
+    [cell.labelCategory setText:[[arrayWithSportNews objectAtIndex:indexPath.row] category]];
+    [cell.labelAuthor setText:[[arrayWithSportNews objectAtIndex:indexPath.row] author]];
+    [cell.labelNumber setText:[NSString stringWithFormat:@"%d",indexPath.row+1]];
+    
+    [self maskRoundBorder:cell.labelNumber color:cell.labelNumber.textColor];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [arrayWithSportNews count];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 115;
+}
+
+#pragma mark UITableView Delegate Methods
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark Private Methods
+
+- (void) maskRoundBorder:(UIView *)view color:(UIColor *)color {
+    view.layer.cornerRadius = 10;
+    view.clipsToBounds = YES;
+    view.layer.borderColor = color.CGColor;
+    view.layer.borderWidth = 0.5;
+}
 
 @end

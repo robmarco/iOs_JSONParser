@@ -35,7 +35,7 @@
 }
 - (void) viewDidAppear:(BOOL)animated {
     self.movieController = [[MPMoviePlayerController alloc] init];
-    self.movieURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://movietrailers.apple.com/movies/summit/twilightbreakingdawn1/twilightbreakingdawn-clip1_480p.mov?width=%f&height=%f", self.view.frame.size.width, self.view.frame.size.height]];
+    self.movieURL = [NSURL URLWithString:[NSString stringWithFormat:@"http://movietrailers.apple.com/movies/fox_searchlight/domhemingway/domhemingway-tlr1_480p.mov?width=%f&height=%f", self.view.frame.size.width, self.view.frame.size.height]];
     
     [self.movieController setContentURL:self.movieURL];
     [self.movieController.view setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];

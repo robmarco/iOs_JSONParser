@@ -10,6 +10,8 @@
 
 #import "NSURLConnectionViewController.h"
 #import "Loan.h"
+#import "LoanCell.h"
+#import "UIKit+AFNetworking.h"
 
 @interface NSURLConnectionViewController ()
 
@@ -34,11 +36,14 @@ NSMutableArray *arrayLoan;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setTitle:@"NSURLConnection"];
+    
+    [self.navigationController.navigationBar setTranslucent:NO];
+    [self.navigationItem setTitleView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"kivaloans_logo2.png"]]];
     
     // Create table and set delegates
     [self.tableData setDelegate:self];
     [self.tableData setDataSource:self];
+    [self.tableData setBackgroundColor:[UIColor blackColor]];
 
 
     // Setting up URL
@@ -73,15 +78,24 @@ NSMutableArray *arrayLoan;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *cellIdentifier = @"cellIdentifier";
+    LoanCell *cell = (LoanCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    if (cell == nil) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"LoanCell" owner:self options:nil];
+        cell = [nib objectAtIndex:0];
     }
     
-    [cell.textLabel setText:[[arrayLoan objectAtIndex:indexPath.row] name]];
+    Loan *loan = [[Loan alloc] init];
+    loan = [arrayLoan objectAtIndex:indexPath.row];
+    
+    [cell.labelCountry setText:loan.country];
+    [cell.labelName setText:loan.name];
+    [cell.labelDescription setText:loan.use];
+    
+    NSString *url = [NSString stringWithFormat:@"http://www.kiva.org/img/w80h80/%d.jpg", [loan.imageId intValue]];
+    // with setImageWithURL (included in UIKit+AFNetworking) we can send an image request async
+    [cell.imageCell setImageWithURL:[NSURL URLWithString:url]];
+    [self maskRoundBorder:cell.imageCell color:[UIColor blackColor]];
     
     return cell;
 }
@@ -89,6 +103,18 @@ NSMutableArray *arrayLoan;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [arrayLoan count];
+}
+
+- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 106;
+}
+
+#pragma mark - UITableView Delegate Methods
+
+- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - NSURLConnection Delegate Methods
@@ -145,6 +171,24 @@ NSMutableArray *arrayLoan;
                         if ([dictLoan objectForKey:@"name"] != [NSNull null])
                             [loan setName:[dictLoan objectForKey:@"name"]];
                         
+                        if ([dictLoan objectForKey:@"status"] != [NSNull null])
+                            [loan setStatus:[dictLoan objectForKey:@"status"]];
+                        
+                        if ([dictLoan objectForKey:@"funded_amount"] != [NSNull null])
+                            [loan setFunded_amount:[dictLoan objectForKey:@"funded_amount"]];
+                        
+                        if ([dictLoan objectForKey:@"basket_amount"] != [NSNull null])
+                            [loan setBasket_amount:[dictLoan objectForKey:@"basket_amount"]];
+                        
+                        if ([[dictLoan objectForKey:@"image"] objectForKey:@"id"] != [NSNull null])
+                            [loan setImageId:[[dictLoan objectForKey:@"image"] objectForKey:@"id"]];
+                        
+                        if ([[dictLoan objectForKey:@"location"] objectForKey:@"country"] != [NSNull null])
+                            [loan setCountry:[[dictLoan objectForKey:@"location"] objectForKey:@"country"]];
+                        
+                        if ([dictLoan objectForKey:@"use"] != [NSNull null])
+                            [loan setUse:[dictLoan objectForKey:@"use"]];
+                        
                         [arrayLoan addObject:loan];                        
                     }
                 }
@@ -165,6 +209,14 @@ NSMutableArray *arrayLoan;
         
         
     });
+}
+
+
+#pragma mark Private Methods
+
+- (void) maskRoundBorder:(UIView *)view color:(UIColor *)color {
+    view.layer.cornerRadius = 10;
+    view.clipsToBounds = YES;
 }
 
 @end

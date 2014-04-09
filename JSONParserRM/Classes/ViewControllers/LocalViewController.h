@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LocalViewController : UIViewController
+@interface LocalViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 {
     NSMutableArray *arrayWithSportNews;
 }
+
+@property (weak, nonatomic) IBOutlet UITableView *tableLocal;
 @end

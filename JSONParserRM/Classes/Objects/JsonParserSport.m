@@ -14,28 +14,35 @@
 
 - (NSMutableArray *)parseRemoteJSON:(ASIHTTPRequest *)requestCon {
     
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
-    
     // Init JSON parser
     JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionValidFlags];
 
     // Parsing the data obtaining the data in a dictionary
     NSDictionary *dic = [jsonDecoder objectWithData:[requestCon responseData]];
-    [self parseDataToArray:array responseDictionary:dic];
     
-    return array;
+    return [self parseDataToArray:dic];;
 }
 
-- (NSMutableArray *)parseLocalJSON:(NSDictionary*)dict {
+- (NSMutableArray *)parseLocalJSON {
+    
+    // Initializate JSON parser
+    JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionValidFlags];
+    
+    // Set the local JSON URL Path
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"jsonExample" ofType:@"json"];
+    NSData* jsonData = [NSData dataWithContentsOfFile:path];
+    
+    // Parsing Data and move data result into a dictionary
+    NSDictionary *dict = [jsonDecoder objectWithData:jsonData];
 
-    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
-    [self parseDataToArray:array responseDictionary:dict];
-    return array;
+    return [self parseDataToArray:dict];;
 }
 
 #pragma mark - Private Methods
 
-- (void) parseDataToArray:(NSMutableArray *)array responseDictionary:(NSDictionary*)dic {
+- (NSMutableArray *) parseDataToArray:(NSDictionary*)dic {
+    
+    NSMutableArray *array = [[NSMutableArray alloc] initWithCapacity:0];
     
     if ([dic objectForKey:@"headlines"] != [NSNull null])
     {
@@ -92,6 +99,8 @@
             [array addObject:sportNew];
         }
     }
+    
+    return array;
 }
 
 
